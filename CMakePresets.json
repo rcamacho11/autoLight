@@ -1,0 +1,34 @@
+{
+ "version": 6,
+ "configurePresets": [
+    {
+        "name": "x64-debug",
+        "generator": "Ninja",
+        "binaryDir": "${sourceDir}/build/${presetName}",
+        "architecture": { "value": "x64", "strategy": "external"},
+        "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug"}
+    },
+    {
+        "name": "x64-release",
+        "inherits": "x64-debug",
+        "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    }
+ ],
+ "buildPresets": [
+    { "name": "x64-debug", "configurePreset": "x64-debug" },
+    { "name": "x64-release", "configurePreset": "x64-release"}
+ ],
+ "testPresets": [
+    {
+        "name": "x64-debug",
+        "configurePreset": "x64-debug",
+        "output": { "outputOnFailure": true},
+        "execution": { "noTestsAction": "error"}
+    },
+    {
+        "name": "x64-release",
+        "inherits": "x64-debug",
+        "configurePreset": "x64-release"
+    }
+ ]
+}
